@@ -2,7 +2,6 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Expedia;
 using Rhino.Mocks;
-using System.Collections.Generic;
 
 namespace ExpediaTest
 {
@@ -98,6 +97,14 @@ namespace ExpediaTest
 
             Assert.AreEqual(target.Mileage, miles);
             mocks.VerifyAll();
+        }
+
+
+        [TestMethod]
+        public void TestThatBMWHasCorrectBasePriceForTenDays()
+        {
+            var target = ObjectMother.BMW();
+            Assert.AreEqual(80, target.getBasePrice());
         }
 	}
 }
