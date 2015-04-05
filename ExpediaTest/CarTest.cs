@@ -2,6 +2,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Expedia;
 using Rhino.Mocks;
+using System.Collections.Generic;
 
 namespace ExpediaTest
 {
@@ -79,6 +80,23 @@ namespace ExpediaTest
             result = target.getCarLocation(25);
             Assert.AreEqual("Uknown", result);
 
+            mocks.VerifyAll();
+        }
+
+        [TestMethod]
+        public void TestCarMileage()
+        {
+            IDatabase mockDB = mocks.StrictMock<IDatabase>();
+            Int32 miles = 225;
+
+            Expect.Call(mockDB.Miles).PropertyBehavior();
+            mocks.ReplayAll();
+            mockDB.Miles = miles;
+
+            var target = new Car(12);
+            target.Database = mockDB;
+
+            Assert.AreEqual(target.Mileage, miles);
             mocks.VerifyAll();
         }
 	}
